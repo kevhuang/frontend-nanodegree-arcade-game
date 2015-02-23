@@ -12,7 +12,7 @@ var Enemy = function() {
   this.y = Math.floor(Math.random() * 3) * 83 + 65;
 
   // Randomize the enemy's speed
-  this.speed = Math.random() + 0.5;
+  this.speed = Math.random() * 200 + 200;
 };
 
 // Update the enemy's position, required method for game
@@ -21,7 +21,7 @@ Enemy.prototype.update = function(dt) {
   // You should multiply any movement by the dt parameter
   // which will ensure the game runs at the same speed for
   // all computers.
-  this.x = this.speed * dt;
+  this.x += this.speed * dt;
 };
 
 // Draw the enemy on the screen, required method for game
