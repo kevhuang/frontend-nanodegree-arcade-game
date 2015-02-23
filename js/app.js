@@ -10,6 +10,9 @@ var Enemy = function() {
   // Generate random coordinates when the Enemy is instantiated
   this.x = Math.floor(Math.random() * 5) * 101;
   this.y = Math.floor(Math.random() * 3) * 83 + 65;
+
+  // Randomize the enemy's speed
+  this.speed = Math.random() + 0.5;
 };
 
 // Update the enemy's position, required method for game
@@ -18,6 +21,7 @@ Enemy.prototype.update = function(dt) {
   // You should multiply any movement by the dt parameter
   // which will ensure the game runs at the same speed for
   // all computers.
+  this.x = this.speed * dt;
 };
 
 // Draw the enemy on the screen, required method for game
