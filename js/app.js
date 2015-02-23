@@ -46,22 +46,35 @@ var Player = function() {
   this.x = 202;
   this.y = 320;
 
-  this.update = function(direction) {
-    if (direction === 'left') {
-      this.x = (this.x - X_MOVE_UNITS < 0) ? this.x : this.x - X_MOVE_UNITS;
-    } else if (direction === 'right') {
-      this.x = (this.x + X_MOVE_UNITS >= X_MOVE_UNITS * 5) ? this.x : this.x + X_MOVE_UNITS;
-    } else if (direction === 'up') {
-      this.y = (this.y - Y_MOVE_UNITS < -Y_MOVE_UNITS) ? this.y : this.y - Y_MOVE_UNITS;
-    } else if (direction === 'down') {
-      this.y = (this.y + Y_MOVE_UNITS >= Y_MOVE_UNITS * 5) ? this.y : this.y + Y_MOVE_UNITS;
+  this.update = function(x, y) {
+    if (x) {
+      this.x = x;
+    }
+    if (y) {
+      this.y = y;
     }
   };
   this.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   };
   this.handleInput = function(direction) {
-    this.update(direction);
+    var x = this.x;
+    var y = this.y;
+
+    if (direction === 'left') {
+      x = (x - X_MOVE_UNITS < 0) ? x : x - X_MOVE_UNITS;
+    } else if (direction === 'right') {
+      x = (x + X_MOVE_UNITS >= X_MOVE_UNITS * 5) ? x : x + X_MOVE_UNITS;
+    } else if (direction === 'up') {
+      y = (y - Y_MOVE_UNITS < -Y_MOVE_UNITS) ? y : y - Y_MOVE_UNITS;
+    } else if (direction === 'down') {
+      y = (y + Y_MOVE_UNITS >= Y_MOVE_UNITS * 5) ? y : y + Y_MOVE_UNITS;
+    }
+
+    if (x !== this.x || y !== this.y) {
+      // Only update player coordinates if they are within the bounds of board
+      this.update(x, y);
+    }
   };
 };
 
