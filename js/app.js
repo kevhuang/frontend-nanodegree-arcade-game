@@ -1,3 +1,7 @@
+// How many pixels each character moves at a time in X and Y directions
+var X_MOVE_UNITS = 101;
+var Y_MOVE_UNITS = 83;
+
 // Enemies our player must avoid
 var Enemy = function() {
   // Variables applied to each of our instances go here,
@@ -8,8 +12,8 @@ var Enemy = function() {
   this.sprite = 'images/enemy-bug.png';
 
   // Generate random coordinates when the Enemy is instantiated
-  this.x = Math.floor(Math.random() * 5) * 101;
-  this.y = Math.floor(Math.random() * 3) * 83 + 65;
+  this.x = Math.floor(Math.random() * 5) * X_MOVE_UNITS;
+  this.y = Math.floor(Math.random() * 3) * Y_MOVE_UNITS + 65;
 
   // Randomize the enemy's speed
   this.speed = Math.random() * 200 + 200;
@@ -22,8 +26,8 @@ Enemy.prototype.update = function(dt) {
   // which will ensure the game runs at the same speed for
   // all computers.
   this.x += this.speed * dt;
-  if (this.x >= document.body.getElementsByTagName('canvas')[0].width) {
-    this.x = -101;
+  if (this.x >= X_MOVE_UNITS * 5) {
+    this.x = -X_MOVE_UNITS;
   }
 };
 
@@ -40,13 +44,25 @@ var Player = function() {
 
   // Inital starting position for the player
   this.x = 202;
-  this.y = 314;
+  this.y = 320;
 
-  this.update = function(){};
+  this.update = function(direction) {
+    if (direction === 'left') {
+      this.x = (this.x - X_MOVE_UNITS < 0) ? this.x : this.x - X_MOVE_UNITS;
+    } else if (direction === 'right') {
+      this.x = (this.x + X_MOVE_UNITS >= X_MOVE_UNITS * 5) ? this.x : this.x + X_MOVE_UNITS;
+    } else if (direction === 'up') {
+      this.y = (this.y - Y_MOVE_UNITS < -Y_MOVE_UNITS) ? this.y : this.y - Y_MOVE_UNITS;
+    } else if (direction === 'down') {
+      this.y = (this.y + Y_MOVE_UNITS >= Y_MOVE_UNITS * 5) ? this.y : this.y + Y_MOVE_UNITS;
+    }
+  };
   this.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   };
-  this.handleInput = function(){};
+  this.handleInput = function(direction) {
+    this.update(direction);
+  };
 };
 
 // Now instantiate your objects.
