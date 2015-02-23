@@ -40,7 +40,9 @@ var Player = function() {
   this.y = 314;
 
   this.update = function(){};
-  this.render = function(){};
+  this.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+  };
   this.handleInput = function(){};
 };
 
