@@ -33,6 +33,12 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 var Player = function() {
+  this.sprite = 'images/char-boy.png';
+
+  // Inital starting position for the player
+  this.x = 202;
+  this.y = 314;
+
   this.update = function(){};
   this.render = function(){};
   this.handleInput = function(){};
