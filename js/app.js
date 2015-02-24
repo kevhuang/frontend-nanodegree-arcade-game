@@ -2,6 +2,9 @@
 var X_MOVE_UNITS = 101;
 var Y_MOVE_UNITS = 83;
 
+// Initially set number of enemies based on the default value on screen
+var NUMBER_OF_ENEMIES = +$('input#enemies').val();
+
 // Initially set enemy speed based on the default speed selected on screen
 var ENEMY_SPEED = +$('input[name="speed"]:checked').val();
 
@@ -116,7 +119,9 @@ var Player = function() {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 var allEnemies = [];
-allEnemies.push(new Enemy(), new Enemy(), new Enemy(), new Enemy());
+for (var i = 0; i < NUMBER_OF_ENEMIES; i++) {
+  allEnemies.push(new Enemy());
+}
 var player = new Player();
 
 // This listens for key presses and sends the keys to your
