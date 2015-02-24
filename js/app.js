@@ -13,14 +13,10 @@ $('input#enemies').change(function() {
     $(this).val(1);
   }
 
-  // Update allEnemies array
-  var currentEnemyCount = allEnemies.length;
-  if (enemyCountPreference < currentEnemyCount) {
-    for (var i = 0; i < currentEnemyCount - enemyCountPreference; i++) {
-      allEnemies.pop();
-    }
-  } else {
-    for (var i = 0; i < enemyCountPreference - currentEnemyCount; i++) {
+  // Update allEnemies array if enemy count preference changed
+  if (enemyCountPreference !== allEnemies.length) {
+    allEnemies = [];
+    for (var i = 0; i < enemyCountPreference; i++) {
       allEnemies.push(new Enemy());
     }
   }
