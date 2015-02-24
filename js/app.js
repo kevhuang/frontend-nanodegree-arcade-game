@@ -1,13 +1,17 @@
 // How many pixels each character moves at a time in X and Y directions
 var X_MOVE_UNITS = 101;
 var Y_MOVE_UNITS = 83;
-var ENEMY_SPEED;
 
-ENEMY_SPEED = +$('input[name="speed"]:checked').val();
-console.log(ENEMY_SPEED);
+// Initially set enemy speed based on the default speed selected on screen
+var ENEMY_SPEED = +$('input[name="speed"]:checked').val();
+
+// Update all enemies' speed when the user changes the speed preference
 $('input[name="speed"]').change(function(){
   if ($(this).prop('checked')) {
     ENEMY_SPEED = +$(this).val();
+    $(allEnemies).each(function(i, e) {
+      e.speed = Math.random() * 200 + ENEMY_SPEED;
+    });
   }
 });
 
