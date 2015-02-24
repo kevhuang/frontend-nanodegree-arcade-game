@@ -29,6 +29,13 @@ Enemy.prototype.update = function(dt) {
   if (this.x >= X_MOVE_UNITS * 5) {
     this.x = -X_MOVE_UNITS;
   }
+
+  // Handles collision with player
+  // The y comparison with player.y is offset by 6 because the player's y is adjusted by 6px
+  // so that the player sprite doesn't flow over to other tiles nor outside the canvas boundary
+  if (player.x >= this.x && player.x <= this.x + X_MOVE_UNITS && this.y === player.y - 6) {
+    player.update(202, 320);
+  }
 };
 
 // Draw the enemy on the screen, required method for game
@@ -75,6 +82,8 @@ var Player = function() {
       // Only update player coordinates if they are within the bounds of board
       this.update(x, y);
     }
+
+    // TODO: Implement solution to reset game when player reaches water
   };
 };
 
@@ -84,7 +93,6 @@ var Player = function() {
 var allEnemies = [];
 allEnemies.push(new Enemy(), new Enemy(), new Enemy(), new Enemy());
 var player = new Player();
-
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
