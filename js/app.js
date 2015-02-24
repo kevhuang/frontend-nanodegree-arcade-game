@@ -31,10 +31,11 @@ Enemy.prototype.update = function(dt) {
   }
 
   // Handles collision with player
-  // The y comparison with player.y is offset by 6 because the player's y is adjusted by 6px
-  // so that the player sprite doesn't flow over to other tiles nor outside the canvas boundary
-  if (player.x >= this.x && player.x <= this.x + X_MOVE_UNITS && this.y === player.y - 6) {
-    player.update(202, 320);
+  // The x comparison with player.x is offset by 25 so that the player sprite is visually closer to the enemy sprite
+  // The y comparison with player.y is offset by 6 due to the player sprite being offset by 6px in relation to 
+  // the enemy sprites so that the player sprite doesn't flow over the canvas boundary
+  if (player.x + 25 >= this.x - X_MOVE_UNITS && player.x + 25 <= this.x + X_MOVE_UNITS && this.y === player.y - 6) {
+    player.reset();
   }
 };
 
@@ -50,8 +51,8 @@ var Player = function() {
   this.sprite = 'images/char-boy.png';
 
   // Inital starting position for the player
-  this.x = 202;
-  this.y = 320;
+  this.x = X_MOVE_UNITS * 2;
+  this.y = Y_MOVE_UNITS * 3 + 71;
 
   this.update = function(x, y) {
     if (x) {
@@ -83,7 +84,18 @@ var Player = function() {
       this.update(x, y);
     }
 
-    // TODO: Implement solution to reset game when player reaches water
+    // Resets the player when player reaches the water
+    if (this.y < 0) {
+      var context = this;
+      // Enforce a delay in resetting the player so that the player can be seen reaching the water
+      setTimeout(function() {
+        context.reset();
+      }, 500);
+    }
+  };
+  this.reset = function() {
+    this.x = X_MOVE_UNITS * 2;
+    this.y = Y_MOVE_UNITS * 3 + 71;
   };
 };
 
