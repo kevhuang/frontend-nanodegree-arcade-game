@@ -5,6 +5,27 @@ var Y_MOVE_UNITS = 83;
 // Initially set number of enemies based on the default value on screen
 var NUMBER_OF_ENEMIES = +$('input#enemies').val();
 
+// Update number of enemies when the user changes the enemy count preference
+$('input#enemies').change(function() {
+  var enemyCountPreference = +$(this).val();
+  if (enemyCountPreference < 1 || !enemyCountPreference) {
+    // Enforce a minimum enemy count of 1
+    $(this).val(1);
+  }
+
+  // Update allEnemies array
+  var currentEnemyCount = allEnemies.length;
+  if (enemyCountPreference < currentEnemyCount) {
+    for (var i = 0; i < currentEnemyCount - enemyCountPreference; i++) {
+      allEnemies.pop();
+    }
+  } else {
+    for (var i = 0; i < enemyCountPreference - currentEnemyCount; i++) {
+      allEnemies.push(new Enemy());
+    }
+  }
+});
+
 // Initially set enemy speed based on the default speed selected on screen
 var ENEMY_SPEED = +$('input[name="speed"]:checked').val();
 
