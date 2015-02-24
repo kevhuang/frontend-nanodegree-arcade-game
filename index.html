@@ -7,10 +7,16 @@
   </head>
   <body>
     <form>
-      Enemy speed:
-      <label><input type="radio" name="speed" value="100">Slow</label>
-      <label><input type="radio" name="speed" value="300" checked>Medium</label>
-      <label><input type="radio" name="speed" value="500">Fast</label>
+      <p>
+        <label for="enemies">Number of enemies</label>
+        <input type="number" id="enemies" value="4">
+      </p>
+      <p>
+        Enemy speed:
+        <label><input type="radio" name="speed" value="100">Slow</label>
+        <label><input type="radio" name="speed" value="300" checked>Medium</label>
+        <label><input type="radio" name="speed" value="500">Fast</label>
+      </p>
     </form>
     <script src="js/jquery-2.1.3.min.js"></script>
     <script src="js/resources.js"></script>
