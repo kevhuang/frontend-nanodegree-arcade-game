@@ -3,11 +3,11 @@ var X_MOVE_UNITS = 101;
 var Y_MOVE_UNITS = 83;
 var ENEMY_SPEED;
 
-ENEMY_SPEED = $('input[name="speed"]:checked').val();
+ENEMY_SPEED = +$('input[name="speed"]:checked').val();
 console.log(ENEMY_SPEED);
 $('input[name="speed"]').change(function(){
   if ($(this).prop('checked')) {
-    ENEMY_SPEED = $(this).val();
+    ENEMY_SPEED = +$(this).val();
   }
 });
 
