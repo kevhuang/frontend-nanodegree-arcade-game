@@ -11,6 +11,7 @@ $('input#enemies').change(function() {
   if (enemyCountPreference < 1 || !enemyCountPreference) {
     // Enforce a minimum enemy count of 1
     $(this).val(1);
+    enemyCountPreference = 1;
   }
 
   // Update allEnemies array if enemy count preference changed
