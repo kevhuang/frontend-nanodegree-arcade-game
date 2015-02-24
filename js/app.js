@@ -1,6 +1,15 @@
 // How many pixels each character moves at a time in X and Y directions
 var X_MOVE_UNITS = 101;
 var Y_MOVE_UNITS = 83;
+var ENEMY_SPEED;
+
+ENEMY_SPEED = $('input[name="speed"]:checked').val();
+console.log(ENEMY_SPEED);
+$('input[name="speed"]').change(function(){
+  if ($(this).prop('checked')) {
+    ENEMY_SPEED = $(this).val();
+  }
+});
 
 // Enemies our player must avoid
 var Enemy = function() {
@@ -16,7 +25,7 @@ var Enemy = function() {
   this.y = Math.floor(Math.random() * 3) * Y_MOVE_UNITS + 65;
 
   // Randomize the enemy's speed
-  this.speed = Math.random() * 200 + 200;
+  this.speed = Math.random() * 200 + ENEMY_SPEED;
 };
 
 // Update the enemy's position, required method for game
