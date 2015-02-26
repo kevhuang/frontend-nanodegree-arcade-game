@@ -89,10 +89,10 @@ var Player = function() {
   this.y = Y_MOVE_UNITS * 3 + 71;
 
   this.update = function(x, y) {
-    if (x) {
+    if (x !== undefined) {
       this.x = x;
     }
-    if (y) {
+    if (y !== undefined) {
       this.y = y;
     }
   };
